@@ -12,11 +12,11 @@ else
 endif
 
 
-CC=clang  # gcc or g++
-CFLAGS+=-ggdb3 -Os
+CC=i686-elf-gcc  # gcc or g++
+CFLAGS+=-O0
 LDFLAGS+=-Wl,--gc-sections
-CFLAGS+=-ggdb3 -Wall -DNORMALUNIX -DLINUX -DSNDSERV -D_DEFAULT_SOURCE # -DUSEASM
-LIBS+=-lm -lc -lX11
+CFLAGS+=-Wall # -DUSEASM
+LIBS+=-lgcc 
 
 # subdirectory for objects
 OBJDIR=build
