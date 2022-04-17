@@ -1,38 +1,29 @@
 import os, shutil, sys, tarfile, os.path
 
-CCFLAGS = "-g -I include -ffreestanding -Wall -Wextra -w -O0"
-LDFLAGS = CCFLAGS + ""
+CCFLAGS = "-g -I include/ -ffreestanding -Wall -Wextra -w -O0"
 LD = "-nostdlib -lgcc -T link.ld -o"
-CC = f"i686-elf-gcc {LDFLAGS}"
-OUTPUT = f"./bin"
+CC = "i686-elf-gcc " + CCFLAGS
 data = []
 files = []
 
 
 def build_all():
     try:
-        shutil.rmtree(OUTPUT, ignore_errors=True)
-        os.mkdir(OUTPUT)
-        
-        shutil.rmtree("./initrd/", ignore_errors=True)
-        os.mkdir("./initrd/")
+        shutil.rmtree("./bin", ignore_errors=True)
+        os.mkdir("./bin")
     except Exception as E:
         print(E)
     
     print("Building apps")
-    os.system(f"i686-elf-gcc -nostdlib -lgcc -ffreestanding -I apps/include -c apps/examples/C/HelloWorld.c -o {OUTPUT}/HelloWorld.o")
-    os.system(f"i686-elf-gcc -nostdlib -lgcc -ffreestanding -I apps/include -c apps/examples/C/sound.c -o {OUTPUT}/beep.o")
-    os.system(f"i686-elf-gcc -nostdlib -lgcc -ffreestanding -I apps/include -c apps/examples/C/popsort_int_test.c -o {OUTPUT}/popsort_int_test.o")
-    os.system(f"i686-elf-gcc -nostdlib -lgcc -ffreestanding -I apps/include -c apps/examples/C/vesa_Russia.c -o {OUTPUT}/vesa_Russia.o")
+    os.system("i686-elf-gcc -nostdlib -lgcc -ffreestanding -I include/ -c examples/C/HelloWorld.c -o ./bin/HelloWorld.o")
+    os.system("i686-elf-gcc -nostdlib -lgcc -ffreestanding -I include/ -c examples/C/sound.c -o ./bin/beep.o")
+    os.system("i686-elf-gcc -nostdlib -lgcc -ffreestanding -I include/ -c examples/C/popsort_int_test.c -o ./bin/popsort_int_test.o")
+    os.system("i686-elf-gcc -nostdlib -lgcc -ffreestanding -I include/ -c examples/C/vesa_Russia.c -o ./bin/vesa_Russia.o")
     
-    os.system(f"i686-elf-gcc -nostdlib -lgcc -T apps/link.ld -o initrd/hi.elf {OUTPUT}/HelloWorld.o")
-    os.system(f"i686-elf-gcc -nostdlib -lgcc -T apps/link.ld -o initrd/sort_int.elf {OUTPUT}/popsort_int_test.o")
-    os.system(f"i686-elf-gcc -nostdlib -lgcc -T apps/link.ld -o initrd/Russia.elf {OUTPUT}/vesa_Russia.o")
-    os.system(f"i686-elf-gcc -nostdlib -lgcc -T apps/link.ld -o initrd/beep.elf {OUTPUT}/beep.o")
-
-    print("Create tar-fs")
-    with open("initrd/readme.txt", 'w+') as fh:
-        fh.write("""SynapseOS is simple OS by Aren Elchinyan""")
+    os.system("i686-elf-gcc -nostdlib -lgcc -T link.ld -o ../bin/apps/hi.elf ./bin/HelloWorld.o")
+    os.system("i686-elf-gcc -nostdlib -lgcc -T link.ld -o ../bin/apps/sort_int.elf ./bin/popsort_int_test.o")
+    os.system("i686-elf-gcc -nostdlib -lgcc -T link.ld -o ../bin/apps/Russia.elf ./bin/vesa_Russia.o")
+    os.system("i686-elf-gcc -nostdlib -lgcc -T link.ld -o ../bin/apps/beep.elf ./bin/beep.o")
 
 
 if __name__ == "__main__":
