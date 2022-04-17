@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <stdarg.h>
 #include <stdint.h>
+#include <scancodes.h>
 
 /*
     Стандартная библиотека SynapseOS
@@ -14,7 +15,7 @@
 //void printf(char *text, ...);
 // или другое
 #define SC_CODE_puts 0
-#define SC_CODE_getchar 1
+#define SC_CODE_getscancode 1
 
 
 enum colors  {
@@ -37,14 +38,43 @@ enum colors  {
 };
 
 
-char getchar(){
+int getscancode(){
     void* res = 0;
 
-    asm volatile("mov %%eax, %0" : "=a"(res) : "a"(SC_CODE_getchar));
+    asm volatile("mov %%eax, %0" : "=a"(res) : "a"(SC_CODE_getscancode));
     asm volatile("int $0x80");
 
     return res;
+}
+
+char getchar(){
+    int i = 0;
+    int SHIFT = 0;
+
+    while(i <= -1) {
+        i = getscancode();
+        if (i == 42) {
+            SHIFT = 1;
+            i = 0;
+            continue;
+        } else {
+            if (SHIFT) {
+                return keyboard_map_shifted[(unsigned char) i];
+            } else {
+                return keyboard_map[(unsigned char) i];
+            }
+            SHIFT = 0;
+        }
+
+    }
 } 
+
+char *gets() {
+    char temp[256];
+
+    return temp;
+} 
+
 
 int print_str(char *str) {
     void* res = 0;
@@ -107,6 +137,7 @@ void puthex(uint32_t i) {
 
 void print(char *format, va_list args) {
     int i = 0;
+    char temp[2] = {0};
 
     while (format[i]) {
         if (format[i] == '%') {
@@ -131,10 +162,12 @@ void print(char *format, va_list args) {
                     puthex(va_arg(args, uint32_t));
                     break;
                 default:
-                    print_str(format[i]);
+                    temp[0] = format[i];
+                    print_str(temp);
             }
         } else {
-            print_str(format[i]);
+            temp[0] = format[i];
+            print_str(temp);
         }
         i++;
     }
