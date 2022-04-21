@@ -7,19 +7,19 @@
 
 int main(){
     for (int x = x_start; x != x_end; x++){
-        for (int y = 256; y != 320; y++){
+        for (int y = 0; y != 64; y++){
             draw_pixel(x, y, VESA_WHITE);
         }
     }
 
     for (int x = x_start; x != x_end; x++){
-        for (int y = 320; y != 384; y++){
+        for (int y = 64; y != 128; y++){
             draw_pixel(x, y, VESA_BLUE);
         }
     }
 
     for (int x = x_start; x != x_end; x++){
-        for (int y = 384; y != 448; y++){
+        for (int y = 128; y != 192; y++){
             draw_pixel(x, y, VESA_RED);
         }
     }
