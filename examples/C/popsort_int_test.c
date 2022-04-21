@@ -2,9 +2,16 @@
 
 
 int main(){
-    int test[] = {32, 4, 8, 0};
+    printf("Test popsort algoritm\n");
+    int test[] = {32, 4, 8, 0, 256, 92, 19, 38, 33};
     int n = sizeof(test) / sizeof(int);
+    printf("Unsort:");
     
+    for (int i = 0; i != sizeof(test) / sizeof(int); i++){
+        printf("\n\t%d: %d", i, test[i]);
+    }
+    printf("\nSort:");
+
     for(int i = 0 ; i < n - 1; i++) { 
        // сравниваем два соседних элемента.
        for(int j = 0 ; j < n - i - 1 ; j++) {  
@@ -19,7 +26,7 @@ int main(){
     }
 
     for (int i = 0; i != sizeof(test) / sizeof(int); i++){
-        printf("\n%d: %d", i, test[i]);
+        printf("\n\t%d: %d", i, test[i]);
     }
     return 0;
 }
