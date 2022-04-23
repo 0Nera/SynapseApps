@@ -48,7 +48,7 @@ int getscancode(){
 
     asm volatile("mov %%eax, %0" : "=a"(res) : "a"(SC_CODE_getscancode));
     asm volatile("int $0x80");
-
+    printf("[%d], [%c], [%s], [%x];\n", res, res, res, res);
     return res;
 }
 
