@@ -10,9 +10,11 @@ files = []
 
 def build_all():
     try:
+        shutil.rmtree("../bin/apps/", ignore_errors=True)
         shutil.rmtree("./bin", ignore_errors=True)
         os.mkdir("./bin")
         os.mkdir("./bin/libc")
+        os.mkdir("../bin/apps/")
     except Exception as E:
         print(E)
     
