@@ -1,4 +1,5 @@
 #pragma once
+
 #define SC_CODE_putpixel 32
 
 enum colors  {
@@ -20,14 +21,4 @@ enum colors  {
     VESA_WHITE = 0xFFFFFF,
 };
 
-void draw_pixel(int x, int y, unsigned int color) {
-    unsigned int arguments[3];
-    arguments[0] = x;
-    arguments[1] = y;
-    arguments[2] = color;
-
-    unsigned int res = 0;
-
-    asm volatile("mov %%eax, %0" : "=a"(res) : "a"(SC_CODE_putpixel), "b"(arguments));
-    asm volatile("int $0x80");
-}
+void draw_pixel(int x, int y, unsigned int color);

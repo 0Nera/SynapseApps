@@ -3,6 +3,7 @@ import os, shutil, sys, tarfile, os.path
 CCFLAGS = "-g -I include/ -ffreestanding -Wall -Wextra -w -O0"
 LD = "-nostdlib -lgcc -T link.ld -o"
 CC = "i686-elf-gcc " + CCFLAGS
+O_LIBC = " ./bin/libc/stdio.o ./bin/libc/ports.o ./bin/libc/stdlib.o ./bin/libc/string.o ./bin/libc/learntask.o ./bin/libc/vesa.o ./bin/libc/scancodes.o"
 data = []
 files = []
 
@@ -11,6 +12,7 @@ def build_all():
     try:
         shutil.rmtree("./bin", ignore_errors=True)
         os.mkdir("./bin")
+        os.mkdir("./bin/libc")
     except Exception as E:
         print(E)
     
@@ -23,16 +25,23 @@ def build_all():
     os.system("i686-elf-gcc -nostdlib -w -lgcc -ffreestanding -I include/ -c examples/C/keys.c -o ./bin/keys.o")
     os.system("i686-elf-gcc -nostdlib -w -lgcc -ffreestanding -I include/ -c examples/C/test.c -o ./bin/test.o")
 
-    os.system("i686-elf-gcc -nostdlib -w -lgcc -ffreestanding -I include/ -c examples/drivers/floppy.c -o ./bin/floppy.o")
+    os.system("i686-elf-gcc -nostdlib -w -lgcc -ffreestanding -I include/ -c libc/stdio.c -o ./bin/libc/stdio.o")
+    os.system("i686-elf-gcc -nostdlib -w -lgcc -ffreestanding -I include/ -c libc/ports.c -o ./bin/libc/ports.o")
+    os.system("i686-elf-gcc -nostdlib -w -lgcc -ffreestanding -I include/ -c libc/stdlib.c -o ./bin/libc/stdlib.o")
+    os.system("i686-elf-gcc -nostdlib -w -lgcc -ffreestanding -I include/ -c libc/string.c -o ./bin/libc/string.o")
+    os.system("i686-elf-gcc -nostdlib -w -lgcc -ffreestanding -I include/ -c libc/learntask.c -o ./bin/libc/learntask.o")
+    os.system("i686-elf-gcc -nostdlib -w -lgcc -ffreestanding -I include/ -c libc/vesa.c -o ./bin/libc/vesa.o")
+    os.system("i686-elf-gcc -nostdlib -w -lgcc -ffreestanding -I include/ -c libc/scancodes.c -o ./bin/libc/scancodes.o")
+
     
-    os.system("i686-elf-gcc -nostdlib -lgcc -T link.ld -o ../bin/apps/hi.elf ./bin/HelloWorld.o")
-    os.system("i686-elf-gcc -nostdlib -lgcc -T link.ld -o ../bin/apps/sort.elf ./bin/popsort_int_test.o")
-    os.system("i686-elf-gcc -nostdlib -lgcc -T link.ld -o ../bin/apps/Russia.elf ./bin/vesa_Russia.o")
-    os.system("i686-elf-gcc -nostdlib -lgcc -T link.ld -o ../bin/apps/beep.elf ./bin/beep.o")
-    os.system("i686-elf-gcc -nostdlib -lgcc -T link.ld -o ../bin/apps/char.elf ./bin/char.o")
-    os.system("i686-elf-gcc -nostdlib -lgcc -T link.ld -o ../bin/apps/keys.elf ./bin/keys.o")
+    os.system("i686-elf-gcc -nostdlib -lgcc -T link.ld -o ../bin/apps/hi.elf ./bin/HelloWorld.o" + O_LIBC)
+    os.system("i686-elf-gcc -nostdlib -lgcc -T link.ld -o ../bin/apps/sort.elf ./bin/popsort_int_test.o" + O_LIBC)
+    os.system("i686-elf-gcc -nostdlib -lgcc -T link.ld -o ../bin/apps/Russia.elf ./bin/vesa_Russia.o" + O_LIBC)
+    os.system("i686-elf-gcc -nostdlib -lgcc -T link.ld -o ../bin/apps/beep.elf ./bin/beep.o" + O_LIBC)
+    os.system("i686-elf-gcc -nostdlib -lgcc -T link.ld -o ../bin/apps/char.elf ./bin/char.o" + O_LIBC)
+    os.system("i686-elf-gcc -nostdlib -lgcc -T link.ld -o ../bin/apps/keys.elf ./bin/keys.o" + O_LIBC)
     os.system("i686-elf-gcc -nostdlib -lgcc -T link.ld -o ../bin/apps/test.elf ./bin/test.o")
-    os.system("i686-elf-gcc -nostdlib -lgcc -T link.ld -o ../bin/apps/floppy.elf ./bin/floppy.o")
+    os.system("i686-elf-gcc -nostdlib -lgcc -T link.ld -o ../bin/apps/floppy.elf ./bin/floppy.o" + O_LIBC)
 
 
 if __name__ == "__main__":

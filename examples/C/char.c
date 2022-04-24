@@ -1,20 +1,14 @@
 #include <stdio.h>
-#include <ports.h>
 
 
 int main(){
-    printf("\nEnter 'e' to break.\n");
 
-    char c;
+    int i = 10;
 
-    while(1){
-        c = getchar();
-
-        if (c == 'e'){
-            break;
-        } else {
-            printf("%c\n", c);
-        }
+    while(i){
+        char c = getchar();
+        printf("[%c %d] ", c, c);
+        i--;
     }
 
     return 0;

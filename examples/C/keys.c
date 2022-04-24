@@ -9,10 +9,10 @@ int main(){
         int c = getscancode();
 
         if (++i == 10){
-            //printf("%d.", c);
+            printf("%d.", c);
             break;
         } else {
-            //printf("%d, ", c);
+            printf("%d, ", c);
         }
     }
 

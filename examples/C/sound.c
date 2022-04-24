@@ -1,6 +1,12 @@
-#include <sound.h>
+#include <ports.h>
 
 
 int main() {
-    beep();
+    for (int i = 10000; i != 500; i--) {
+        play_sound(i);
+        sleep(1);
+    }
+    nosound();
+
+    return 0;
 }

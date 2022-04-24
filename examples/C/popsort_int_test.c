@@ -2,9 +2,10 @@
 
 
 int main(){
-    printf("Test popsort algoritm\n");
     int test[] = {32, 4, 8, 0, 256, 92, 19, 38, 33};
     int n = sizeof(test) / sizeof(int);
+
+    printf("Test popsort algoritm\n");
     printf("Unsort:");
     
     for (int i = 0; i != sizeof(test) / sizeof(int); i++){
@@ -28,5 +29,6 @@ int main(){
     for (int i = 0; i != sizeof(test) / sizeof(int); i++){
         printf("\n\t%d: %d", i, test[i]);
     }
+    
     return 0;
 }

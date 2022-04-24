@@ -1,18 +1,11 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <conio.h>
-#include <windows.h>
 
-void setcur(int x, int y)
-{
-    COORD coord;
-    coord.X = x;
-    coord.Y = y;
-    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+
+void setcur(int x, int y) {
 }
 
-int main()
-{
+
+int main() {
     // создаем все нужные переменные
     char mas[10][21];
     int i;

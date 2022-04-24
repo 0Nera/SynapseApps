@@ -1,7 +1,7 @@
 #include <vesa.h>
 
 
-#define x_start 768
+#define x_start 0
 #define x_end 1024
 
 
