@@ -33,9 +33,14 @@ char getchar(){
 } 
 
 char *gets() {
-    char temp[256];
+    void* res = 0;
+    char *result = "";
 
-    return temp;
+    asm volatile("mov %%eax, %0" : "=a"(res) : "a"(SC_CODE_gets));
+    asm volatile("int $0x80");
+    asm volatile("mov %%edx, %0" : "=a"(result));
+
+    return result;
 } 
 
 int getversion(){
@@ -112,7 +117,8 @@ void print(char *format, va_list args) {
                     print_str(va_arg(args, char*));
                     break;
                 case 'c':
-                    print_str(va_arg(args, int));
+                    temp[0] = va_arg(args, char*);
+                    print_str(temp);
                     break;
                 case 'd':
                     putint(va_arg(args, int));
