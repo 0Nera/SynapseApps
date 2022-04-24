@@ -31,7 +31,6 @@ char getchar();
 char *gets();
 int getversion();
 int print_str(char *str);
-int draw_pixel(uint32_t x, uint32_t y, uint32_t color);
 void putint(const int i);
 void puthex(uint32_t i);
 void print(char *format, va_list args);
