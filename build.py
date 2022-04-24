@@ -41,7 +41,6 @@ def build_all():
     os.system("i686-elf-gcc -nostdlib -lgcc -T link.ld -o ../bin/apps/char.elf ./bin/char.o" + O_LIBC)
     os.system("i686-elf-gcc -nostdlib -lgcc -T link.ld -o ../bin/apps/keys.elf ./bin/keys.o" + O_LIBC)
     os.system("i686-elf-gcc -nostdlib -lgcc -T link.ld -o ../bin/apps/test.elf ./bin/test.o")
-    os.system("i686-elf-gcc -nostdlib -lgcc -T link.ld -o ../bin/apps/floppy.elf ./bin/floppy.o" + O_LIBC)
 
 
 if __name__ == "__main__":

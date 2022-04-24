@@ -1,6 +1,8 @@
 #pragma once
 
-#define SC_CODE_putpixel 32
+#define SC_CODE_putpixel        32
+#define SC_CODE_drawline        33
+#define SC_CODE_version         40
 
 enum colors  {
     VESA_BLACK = 0x000000,
@@ -17,7 +19,7 @@ enum colors  {
     VESA_LIGHT_CYAN = 0x55FFFF,
     VESA_LIGHT_RED = 0xFF5555,
     VESA_LIGHT_MAGENTA = 0xFF55FF,
-    VESA_LIGHT_BROWN = 0xffff55,
+    VESA_LIGHT_YELLOW = 0xffff55,
     VESA_WHITE = 0xFFFFFF,
 };
 
