@@ -6,12 +6,12 @@ int main(){
     int n = sizeof(test) / sizeof(int);
 
     printf("Test popsort algoritm\n");
-    printf("Unsort:");
+    printf("Unsort:\n");
     
     for (int i = 0; i != sizeof(test) / sizeof(int); i++){
-        printf("\n\t%d: %d", i, test[i]);
+        printf(" %d: %d", i, test[i]);
     }
-    printf("\nSort:");
+    printf("\nSort:\n");
 
     for(int i = 0 ; i < n - 1; i++) { 
        // сравниваем два соседних элемента.
@@ -27,7 +27,7 @@ int main(){
     }
 
     for (int i = 0; i != sizeof(test) / sizeof(int); i++){
-        printf("\n\t%d: %d", i, test[i]);
+        printf(" %d: %d", i, test[i]);
     }
     
     return 0;
